@@ -182,4 +182,14 @@ public class VitrineApp extends Application{
 		
 		return itensEncontrados;
 	}
+
+	public static Carrinho getCarrinho() {
+		return carrinho;
+	}
+
+	public static void setCarrinho(Carrinho carrinho) {
+		VitrineApp.carrinho = carrinho;
+	}
+	
+	
 }

@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +15,7 @@ public class ItemApp extends Application {
 	private ImageView imgItem;
 	private Label lblPreco, lblDescricao;
 	private Button btnAddCarrinho;
-	private static Stage stage;
+	public static Stage stage;
 	private static Produto produto;
 	
 	private static int index;
@@ -25,6 +27,21 @@ public class ItemApp extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	private void initListeners() {
+		btnAddCarrinho.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				VitrineApp.getCarrinho().addProdutos(produto);
+				try {
+					new CarrinhoApp().start(new Stage());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
 	}
 	
 	private void initComponets() {
@@ -57,6 +74,7 @@ public class ItemApp extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		initComponets();
+		initListeners();
 		
 		Scene scene = new Scene(pane);
 		stage.setScene(scene);
